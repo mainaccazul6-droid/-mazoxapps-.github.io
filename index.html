@@ -56,6 +56,21 @@
     .btn:hover {
       background: #00cc77;
     }
+
+    .rating {
+      margin-top: 5px;
+      color: gold;
+      font-size: 14px;
+    }
+
+    input {
+      padding:10px;
+      width:80%;
+      max-width:400px;
+      margin-top:20px;
+      border-radius:8px;
+      border:none;
+    }
   </style>
 </head>
 
@@ -64,60 +79,51 @@
   <h1>MAZO-X APPS</h1>
   <p>Download apps for MAZO-X OS</p>
 
+  <!-- 🔍 BUSCADOR -->
   <input 
-  type="text" 
-  id="search" 
-  placeholder="🔍 Search apps..."
-  onkeyup="buscarApps()"
-  style="
-    padding:10px;
-    width:80%;
-    max-width:400px;
-    margin-top:20px;
-    border-radius:8px;
-    border:none;
-"
->
-  <div class="store">
+    type="text" 
+    id="search" 
+    placeholder="🔍 Search apps..."
+    onkeyup="buscarApps()"
+  >
 
-    <!-- APP 1 -->
-    <div class="app">
-      <h2>Notes App</h2>
-      <p>Simple notes application for MAZO-X</p>
-      <a class="btn" href="apps/notes.mazoxpkg">Download</a>
-    </div>
+  <!-- 📦 STORE DINÁMICO -->
+  <div class="store" id="store"></div>
 
-    <!-- APP 2 -->
-    <div class="app">
-      <h2>Calculator</h2>
-      <p>Basic math calculator for MAZO-X</p>
-      <a class="btn" href="apps/calc.mazoxpkg">Download</a>
-    </div>
+  <!-- 🔄 CARGA AUTOMÁTICA DE APPS -->
+  <script>
+    fetch("apps.json")
+      .then(res => res.json())
+      .then(data => {
+        let store = document.getElementById("store");
 
-    <!-- APP 3 -->
-    <div class="app">
-      <h2>Game Demo</h2>
-      <p>Mini game for MAZO-X system</p>
-      <a class="btn" href="apps/game.mazoxpkg">Download</a>
-    </div>
+        data.forEach(app => {
+          store.innerHTML += `
+            <div class="app">
+              <h2>${app.name}</h2>
+              <p>${app.desc}</p>
+              <div class="rating">★ ${app.rating}</div>
+              <a class="btn" href="${app.file}">Download</a>
+            </div>
+          `;
+        });
+      });
 
-  </div>
+    function buscarApps() {
+      let input = document.getElementById("search").value.toLowerCase();
+      let apps = document.getElementsByClassName("app");
 
-<script>
-function buscarApps() {
-  let input = document.getElementById("search").value.toLowerCase();
-  let apps = document.getElementsByClassName("app");
+      for (let i = 0; i < apps.length; i++) {
+        let title = apps[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
 
-  for (let i = 0; i < apps.length; i++) {
-    let title = apps[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
-
-    if (title.includes(input)) {
-      apps[i].style.display = "block";
-    } else {
-      apps[i].style.display = "none";
+        if (title.includes(input)) {
+          apps[i].style.display = "";
+        } else {
+          apps[i].style.display = "none";
+        }
+      }
     }
-  }
-}
-      </script>
+  </script>
+
 </body>
 </html>
