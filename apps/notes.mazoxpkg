@@ -1,1 +1,21 @@
+MAZOXPKG v1
+name: Notes App
+version: 1.0.0
+author: MAZO-X
 
+description:
+Simple notes application for MAZO-X OS
+
+entry:
+notes.main
+
+code:
+PRINT "Notes App Loaded"
+PRINT "Write your notes here..."
+
+features:
+- create notes
+- save notes (simulated)
+- simple UI text mode
+
+end
