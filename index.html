@@ -103,7 +103,9 @@
               <h2>${app.name}</h2>
               <p>${app.desc}</p>
               <div class="rating">★ ${app.rating}</div>
-              <a class="btn" href="${app.file}">Download</a>
+              <a class="btn" href="apps/notes.mazoxpkg" onclick="installApp('apps/notes.mazoxpkg', 'Notes App')">
+  Install
+</a>
             </div>
           `;
         });
@@ -125,5 +127,16 @@
     }
   </script>
 
+<script>
+function installApp(file, name) {
+
+  alert("Installing " + name + "...");
+
+  // Simulación de instalación
+  setTimeout(() => {
+    alert("✔ " + name + " installed successfully in MAZO-X!");
+  }, 1500);
+}
+</script>
 </body>
 </html>
