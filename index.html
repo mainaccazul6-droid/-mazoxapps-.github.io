@@ -77,7 +77,8 @@
     border-radius:8px;
     border:none;
 "
-><div class="store">
+>
+  <div class="store">
 
     <!-- APP 1 -->
     <div class="app">
@@ -102,5 +103,21 @@
 
   </div>
 
+<script>
+function buscarApps() {
+  let input = document.getElementById("search").value.toLowerCase();
+  let apps = document.getElementsByClassName("app");
+
+  for (let i = 0; i < apps.length; i++) {
+    let title = apps[i].getElementsByTagName("h2")[0].innerText.toLowerCase();
+
+    if (title.includes(input)) {
+      apps[i].style.display = "block";
+    } else {
+      apps[i].style.display = "none";
+    }
+  }
+}
+      </script>
 </body>
 </html>
